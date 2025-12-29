@@ -1,0 +1,15 @@
+name: Commit Lint
+on:
+    pull_request:
+        types: [opened, edited, reopened, synchronize]
+jobs:
+    commitlint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0
+            - name: Lint commits with commitlint
+              uses: wagoid/commitlint-github-action@v4
+              env:
+                  NODE_OPTIONS: "--max-old-space-size=4096"
